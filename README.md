@@ -58,3 +58,16 @@ That's all.
 
 https://github.com/neovim/nvim-lspconfig
 
+
+## Chrome OS 
+
+Maybe, you got a problem about custom font. Here, I give a way to set custom font in terminal.
+In terminal, you open DevTools by <Ctrl + Shift + j>
+
+```
+term_.prefs_.set('font-family', '"JetBrains Mono Nerd", monospace');
+term_.prefs_.set('user-css-text', '@font-face {font-family: "JetBrains Mono Nerd"; src: url("https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"); font-weight: normal; font-style: normal;}')
+```
+
+
+
