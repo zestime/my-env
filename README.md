@@ -11,6 +11,11 @@ sudo apt install zsh
 
 Yes, I love oh-my-zsh. It's almost filled.
 
+## rg
+
+I use ripgrep for finding in source code.
+
+
 ## Neovim
 
 You can use package manager such as apt. I recommend to download from github. You can get the newest one.
