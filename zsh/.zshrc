@@ -108,3 +108,7 @@ alias zshconfig="nvim ~/.zshrc"
 alias nvimconfig="nvim ~/workspace/my-env/nvim"
 alias workspace="cd ~/workspace"
 alias workbench="cd ~/workspace/workbench"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
