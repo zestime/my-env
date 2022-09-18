@@ -11,6 +11,16 @@ sudo apt install zsh
 
 Yes, I love oh-my-zsh. It's almost filled.
 
+### oh-my-zsh
+
+with some plugsin
+
+```
+% git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions 
+% git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+```
+
 ## rg
 
 I use ripgrep for finding in source code.
