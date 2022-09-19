@@ -109,6 +109,12 @@ alias nvimconfig="nvim ~/workspace/my-env/nvim"
 alias workspace="cd ~/workspace"
 alias workbench="cd ~/workspace/workbench"
 
+NVIM_BEGINNER=~/.config/nvim-beginner
+export NVIM_BEGINNER
+
+alias nvb='XDG_DATA_HOME=$NVIM_BEGINNER/share XDG_CONFIG_HOME=$NVIM_BEGINNER nvim'
+export nvb
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
