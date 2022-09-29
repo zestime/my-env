@@ -86,3 +86,6 @@ term_.prefs_.set('user-css-text', '@font-face {font-family: "JetBrains Mono Nerd
 
 
 
+Make sure you have the cowsay and figlet utilities installed. They are used by the configured sources.
+
+
