@@ -108,6 +108,7 @@ alias zshconfig="nvim ~/.zshrc"
 alias nvimconfig="nvim ~/workspace/my-env/nvim"
 alias workspace="cd ~/workspace"
 alias workbench="cd ~/workspace/workbench"
+alias python="python3"
 
 NVIM_BEGINNER=~/.config/nvim-beginner
 export NVIM_BEGINNER
