@@ -1,35 +1,61 @@
-local keymap = vim.keymap
+local keymap = vim.api.nvim_set_keymap
+local default_opts = { noremap = true, silent = true }
+local expr_opts = { noremap = true, expr = true, silent = true }
 
-keymap.set('n', 'x', '"_x"')
+-- Better escape using jk in insert and terminal mode
+keymap("i", "jk", "<ESC>", default_opts)
+keymap("t", "jk", "<C-\\><C-n>", default_opts)
 
--- Increment/decrement
-keymap.set('n', '+', '<C-a>')
-keymap.set('n', '-', '<C-x>')
+-- ??? no idea
+keymap('n', 'x', '"_x"', default_opts)
+
+-- Paste over currently selected text without yanking it
+keymap("v", "p", '"_dP', default_opts)
+
+-- Switch buffer
+keymap("n", "<S-h>", ":bprevious<CR>", default_opts)
+keymap("n", "<S-l>", ":bnext<CR>", default_opts)
+
+-- Cancel search highlighting with ESC
+keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
+
+-- Move selected line / block of text in visual mode
+keymap("x", "K", ":move '<-2<CR>gv-gv", default_opts)
+keymap("x", "J", ":move '>+1<CR>gv-gv", default_opts)
+
+-- Visual line wraps
+keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", expr_opts)
+keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 
 -- Delete a word backwards
--- keymap.set('n', 'dw', 'vb"_d') - use db
+-- keymap('n', 'dw', 'vb"_d', default_opts) - use db
 
 -- Select all
-keymap.set('n', '<C-a>', 'gg<S-v>G')
+keymap('n', '<C-a>', 'gg<S-v>G', default_opts)
 
 -- Save with root permission (not working for now)
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
--- New tab
-keymap.set('n', 'te', ':tabedit<Return>', { silent = true})
--- Split window
-keymap.set('n', 'ss', ':split<Return><C-w>w', { silent = true})
-keymap.set('n', 'sv', ':vsplit<Return><C-w>w', { silent = true})
---Move window
-keymap.set('n', '<Space>', '<C-w>w')
---
--- Resize window
-keymap.set('', 'sh', '<C-w>h')
-keymap.set('', 'sk', '<C-w>k')
-keymap.set('', 'sj', '<C-w>j')
-keymap.set('', 'sl', '<C-w>l')
+-- Increment/decrement
+keymap('n', '+', '<C-a>', default_opts)
+keymap('n', '-', '<C-x>', default_opts)
 
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
+-- New tab
+keymap('n', 'te', ':tabedit<Return>', default_opts)
+
+-- Split window
+keymap('n', 'ss', ':split<Return><C-w>w', default_opts)
+keymap('n', 'sv', ':vsplit<Return><C-w>w', default_opts)
+--Move window
+-- keymap('n', '<Space>', '<C-w>w', default_opts)
+
+-- Resize window
+keymap('', 'sh', '<C-w>h', default_opts)
+keymap('', 'sk', '<C-w>k', default_opts)
+keymap('', 'sj', '<C-w>j', default_opts)
+keymap('', 'sl', '<C-w>l', default_opts)
+
+keymap('n', '<C-w><left>', '<C-w><', default_opts)
+keymap('n', '<C-w><right>', '<C-w>>', default_opts)
+keymap('n', '<C-w><up>', '<C-w>+', default_opts)
+keymap('n', '<C-w><down>', '<C-w>-', default_opts)

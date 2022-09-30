@@ -1,36 +1,63 @@
+local api = vim.api
+local g = vim.g
+local opt = vim.opt
+
+-- Remap leader and local leader to <Space>
+api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+g.mapleader = " "
+g.maplocalleader = " "
+
 vim.cmd("autocmd!")
 
 vim.scriptencoding = 'utf-8'
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
-
 vim.wo.number = true
 
-vim.opt.title = true
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.hlsearch = true
-vim.opt.backup = false
-vim.opt.showcmd = true
-vim.opt.cmdheight = 1
-vim.opt.laststatus = 2
-vim.opt.scrolloff = 10
-vim.opt.shell = 'zsh'
-vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
-vim.opt.inccommand = 'split'
-vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
-vim.opt.smarttab = true
-vim.opt.breakindent = true
+opt.encoding = 'utf-8'
+opt.fileencoding = 'utf-8'
 
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
-vim.opt.expandtab = true
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.expandtab = true
 
-vim.opt.wrap = false -- No Wrap lines
-vim.opt.backspace = { 'start', 'eol', 'indent' }
-vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
-vim.opt.wildignore:append { '*/node_modules/*' }
+opt.title = true
+opt.autoindent = true
+opt.smartindent = true
+opt.backup = false
+opt.showcmd = true
+opt.cmdheight = 1
+opt.laststatus = 2
+opt.scrolloff = 10
+opt.shell = 'zsh'
+opt.backupskip = { '/tmp/*', '/private/tmp/*' }
+opt.inccommand = 'split'
+opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+opt.smarttab = true
+opt.breakindent = true
+
+opt.termguicolors = true -- Enable colors in terminal
+opt.hlsearch = true --Set highlight on search
+opt.number = true --Make line numbers default
+opt.relativenumber = true --Make relative number default
+opt.mouse = "a" --Enable mouse mode
+opt.breakindent = true --Enable break indent
+opt.undofile = true --Save undo history
+opt.ignorecase = true --Case insensitive searching unless /C or capital in search
+opt.smartcase = true -- Smart case
+opt.updatetime = 250 --Decrease update time
+opt.signcolumn = "yes" -- Always show sign column
+opt.clipboard = "unnamedplus" -- Access system clipboard
+opt.timeoutlen = 300  -- Time in milliseconds to wait for a mapped sequence to complete.
+
+opt.wrap = false -- No Wrap lines
+opt.backspace = { 'start', 'eol', 'indent' }
+opt.path:append { '**' } -- Finding files - Search down into subfolders
+opt.wildignore:append { '*/node_modules/*' }
+
+-- Add asterisks in block comments
+opt.formatoptions:append { 'r' }
+
+
 
 
 -- Undercurl
@@ -43,8 +70,13 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   command = "set nopaste"
 })
 
--- Add asterisks in block comments
-vim.opt.formatoptions:append { 'r' }
 
--- Apply Nord theme
--- pcall(vim.cmd, 'colorscheme nord')
+-- Highlight on yank
+vim.cmd [[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]]
+
+

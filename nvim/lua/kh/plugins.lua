@@ -8,10 +8,15 @@ vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
+
+  -- Colorscheme
   use {
-    'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
+    "sainnhe/everforest",
+    config = function()
+      vim.cmd "colorscheme everforest"
+    end,
   }
+
   use 'nvim-lualine/lualine.nvim' -- Statusline
   use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
@@ -52,5 +57,49 @@ packer.startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
 
-  use 'arcticicestudio/nord-vim'
+  -- WhichKey : show possible key bindings of the command
+  use {
+    "folke/which-key.nvim",
+    event = "VimEnter",
+    config = function()
+      require("kh/whichkey").setup()
+    end,
+  }
+
+  -- IndentLine
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufReadPre",
+    config = function()
+      require("kh/indentblankline").setup()
+    end,
+  }
+  -- Better Comment
+  use {
+    "numToStr/Comment.nvim",
+    opt = true,
+    keys = { "gc", "gcc", "gbc" },
+    config = function()
+      require("Comment").setup {}
+    end,
+  }
+
+  -- Easy hopping
+  use {
+    "phaazon/hop.nvim",
+    cmd = { "HopWord", "HopChar1" },
+    config = function()
+      require("hop").setup {}
+    end,
+  }
+
+  -- Easy motion
+  use {
+    "ggandor/lightspeed.nvim",
+    keys = { "s", "S", "f", "F", "t", "T" },
+    config = function()
+      require("lightspeed").setup {}
+    end,
+  }
+
 end)
