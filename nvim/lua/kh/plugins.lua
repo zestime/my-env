@@ -11,9 +11,39 @@ packer.startup(function(use)
 
   -- Colorscheme
   use {
+    "folke/tokyonight.nvim",
+    config = function()
+      vim.cmd "colorscheme tokyonight"
+    end,
+    disable = true,
+  }
+  use {
     "sainnhe/everforest",
     config = function()
+      vim.g.everforest_better_performance = 1
       vim.cmd "colorscheme everforest"
+    end,
+    disable = false,
+  }
+  use {
+    "sainnhe/gruvbox-material",
+    config = function()
+      vim.cmd "colorscheme gruvbox-material"
+    end,
+    disable = true,
+  }
+  use {
+    "arcticicestudio/nord-vim",
+    config = function()
+      vim.cmd "colorscheme nord"
+    end,
+    disable = true,
+  }
+  use {
+    "norcalli/nvim-colorizer.lua",
+    cmd = "ColorizerToggle",
+    config = function()
+      require("colorizer").setup()
     end,
   }
 
@@ -45,7 +75,6 @@ packer.startup(function(use)
   use 'nvim-telescope/telescope-file-browser.nvim'
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
-  use 'norcalli/nvim-colorizer.lua'
   use 'folke/zen-mode.nvim'
   use({
     "iamcco/markdown-preview.nvim",
