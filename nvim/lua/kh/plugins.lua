@@ -162,10 +162,18 @@ packer.startup(function(use)
   use { "google/vim-searchindex", event = "BufReadPre" }
   use { "tyru/open-browser.vim", event = "BufReadPre" }
 
-
-  -- Java
-  use { "mfussenegger/nvim-jdtls", ft = { "java"}}
-
+  use {
+    "max397574/better-escape.nvim",
+    event = { "InsertEnter" },
+    config = function()
+      require("better_escape").setup {
+        mapping = { "jk" },
+        timeout = vim.o.timeoutlen,
+        keys = "<ESC>",
+      }
+    end,
+  }
+  
   -- Terminal
   use {
     "akinsho/toggleterm.nvim",
@@ -176,6 +184,9 @@ packer.startup(function(use)
       require("kh.toggleterm").setup()
     end,
   }
+
+  -- Java
+  use { "mfussenegger/nvim-jdtls", ft = { "java"}}
 
   -- Test
   use {
