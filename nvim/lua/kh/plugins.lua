@@ -52,6 +52,7 @@ packer.startup(function(use)
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
 
   -- Autocompletion
+  use {'neoclide/coc.nvim', branch = 'release'}
   use 'hrsh7th/nvim-cmp' -- Completion
   use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
@@ -129,6 +130,94 @@ packer.startup(function(use)
     config = function()
       require("lightspeed").setup {}
     end,
+  }
+
+  -- IDE
+  use {
+    "antoinemadec/FixCursorHold.nvim",
+    event = "BufReadPre",
+    config = function()
+      vim.g.cursorhold_updatetime = 100
+    end,
+  }
+  use {
+    "max397574/better-escape.nvim",
+    event = { "InsertEnter" },
+    config = function()
+      require("better_escape").setup {
+        mapping = { "jk" },
+        timeout = vim.o.timeoutlen,
+        keys = "<ESC>",
+      }
+    end,
+  }
+  use {
+    "karb94/neoscroll.nvim",
+    event = "BufReadPre",
+    config = function()
+      require("config.neoscroll").setup()
+    end,
+    disable = true,
+  }
+  use { "google/vim-searchindex", event = "BufReadPre" }
+  use { "tyru/open-browser.vim", event = "BufReadPre" }
+
+
+  -- Java
+  use { "mfussenegger/nvim-jdtls", ft = { "java"}}
+
+  -- Terminal
+  use {
+    "akinsho/toggleterm.nvim",
+    keys = { [[<C-\>]]},
+    cmd = { "ToggleTerm", "TermExec"},
+    module = {"toggleterm", "toggleterm.terminal"},
+    config = function()
+      require("kh.toggleterm").setup()
+    end,
+  }
+
+  -- Test
+  use {
+    "nvim-neotest/neotest",
+    opt = true,
+    wants = {
+      "plenary.nvim",
+      "nvim-treesitter",
+      "FixCursorHold.nvim",
+      "neotest-python",
+      "neotest-plenary",
+      "neotest-go",
+      "neotest-jest",
+      "neotest-vim-test",
+      "neotest-rust",
+      "vim-test",
+      "overseer.nvim",
+    },
+    requires = {
+      "vim-test/vim-test",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-go",
+      "haydenmeade/neotest-jest",
+      "nvim-neotest/neotest-vim-test",
+      "rouge8/neotest-rust",
+    },
+    module = { "neotest", "neotest.async" },
+    cmd = {
+      "TestNearest",
+      "TestFile",
+      "TestSuite",
+      "TestLast",
+      "TestVisit",
+    },
+    config = function()
+      require("config.neotest").setup()
+    end,
+    disable = false,
   }
 
 end)

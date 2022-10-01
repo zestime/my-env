@@ -5,7 +5,7 @@ if not jdtls_ok then
 end
 
 -- Installtation location of jdtls by nvim-lsp-installer
-local JDTLS_LOCATION = nvim.fn.stdpath "data" .. "/lsp_servers/jdtls"
+local JDTLS_LOCATION = vim.fn.stdpath "data" .. "/lsp_servers/jdtls"
 
 -- Data directory
 local HOME = os.getenv "HOME"
@@ -53,8 +53,8 @@ local config = {
   },
 
   -- on_attach = require("config.lsp").on_attach,
-  capabilities = require("config.lsp").capabilities,
-  root_dir = root_dir,
+  -- capabilities = require("config.lsp").capabilities,
+  -- root_dir = root_dir,
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -149,3 +149,4 @@ require("jdtls.setup").add_commands()
 
 vim.bo.shiftwidth = 2
 vim.bo.tabstop = 2
+
