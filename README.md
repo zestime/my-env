@@ -21,6 +21,12 @@ with some plugsin
 
 ```
 
+if you use nvm,
+
+```
+git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+```
+
 ## rg
 
 I use ripgrep for finding in source code.
