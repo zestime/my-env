@@ -1,6 +1,12 @@
 
 # Start...
 
+For the development, I will cover following tools.
+
+1. neovim
+1. zsh
+1. 
+
 ## Install zsh
 
 Install by apt if you are in Ubuntu. 

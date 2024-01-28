@@ -2,81 +2,57 @@ local api = vim.api
 local g = vim.g
 local opt = vim.opt
 
--- Remap leader and local leader to <Space>
+-- remap leader and local leader to <Space>
 api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 g.mapleader = " "
 g.maplocalleader = " "
 
-vim.cmd("autocmd!")
-
-vim.scriptencoding = 'utf-8'
+vim.scriptencoding = "utf-8"
 vim.wo.number = true
-
-opt.encoding = 'utf-8'
-opt.fileencoding = 'utf-8'
-
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.softtabstop = 2
-opt.expandtab = true
-
-opt.title = true
-opt.autoindent = true
-opt.smartindent = true
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
 opt.backup = false
-opt.showcmd = true
-opt.cmdheight = 1
-opt.laststatus = 2
-opt.scrolloff = 10
-opt.shell = 'zsh'
-opt.backupskip = { '/tmp/*', '/private/tmp/*' }
-opt.inccommand = 'split'
-opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+opt.shell = "zsh"
+opt.ignorecase = true -- case insensitive searching UNLESS /C or capital in search
 opt.smarttab = true
+opt.smartcase = true
 opt.breakindent = true
+opt.hlsearch = true
+opt.number = true
+opt.relativenumber = true
+opt.mouse = "a"
+opt.undofile = true
+opt.signcolumn = "yes"        -- always show sign column
+opt.clipboard = "unnamedplus" -- access syustem clipboard
+opt.timeoutlen = 300          -- time in milliseconds to wait for a mapped sequence to complete
+opt.wrap = false
 
-opt.termguicolors = true -- Enable colors in terminal
-opt.hlsearch = true --Set highlight on search
-opt.number = true --Make line numbers default
-opt.relativenumber = true --Make relative number default
-opt.mouse = "a" --Enable mouse mode
-opt.breakindent = true --Enable break indent
-opt.undofile = true --Save undo history
-opt.ignorecase = true --Case insensitive searching unless /C or capital in search
-opt.smartcase = true -- Smart case
-opt.updatetime = 250 --Decrease update time
-opt.signcolumn = "yes" -- Always show sign column
-opt.clipboard = "unnamedplus" -- Access system clipboard
-opt.timeoutlen = 300  -- Time in milliseconds to wait for a mapped sequence to complete.
+-- better secape using jk in insert and terminal mode
+local keymap = vim.api.nvim_set_keymap
+local default_opts = { noremap = true, silent = true }
 
-opt.wrap = false -- No Wrap lines
-opt.backspace = { 'start', 'eol', 'indent' }
-opt.path:append { '**' } -- Finding files - Search down into subfolders
-opt.wildignore:append { '*/node_modules/*' }
+-- better escape using jk in insert and terminal mode
+keymap("i", "jk", "<ESC>", default_opts)
+keymap("t", "jk", "<C-\\><C-n>", default_opts)
 
--- Add asterisks in block comments
-opt.formatoptions:append { 'r' }
+-- paset over currently selected text without yanking it
+keymap("v", "p", '"_dP', default_opts)
 
+-- increment / decrement
+keymap("n", "+", "<C-a>", default_opts)
+keymap("n", "-", "<C-x>", default_opts)
 
+-- split window
+keymap("n", "ss", ":split<Return><C-w>w", default_opts)
+keymap("n", "sv", ":vsplit<Return><C-w>w", default_opts)
 
+-- Resize window
+keymap("", "sh", "<C-w>h", default_opts)
+keymap("", "sk", "<C-w>k", default_opts)
+keymap("", "sj", "<C-w>j", default_opts)
+keymap("", "sl", "<C-w>l", default_opts)
 
--- Undercurl
-vim.cmd([[let &t_Cs = "\e[4:3m"]])
-vim.cmd([[let &t_Ce = "\e[4:0m"]])
-
--- Turn off paste mode when leaving insert
-vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = '*',
-  command = "set nopaste"
-})
-
-
--- Highlight on yank
-vim.cmd [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]]
-
-
+keymap("n", "<C-w><left>", "<C-w><", default_opts)
+keymap("n", "<C-w><right>", "<C-w>>", default_opts)
+keymap("n", "<C-w><up>", "<C-w>+", default_opts)
+keymap("n", "<C-w><down>", "<C-w>-", default_opts)
